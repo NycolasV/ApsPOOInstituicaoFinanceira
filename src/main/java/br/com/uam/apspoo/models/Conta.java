@@ -6,7 +6,7 @@ import java.time.LocalDate;
  * @author NycolasVieira
  */
 public class Conta implements ContaInterface{
-    private static int numero = 1;
+    private static int numero = 0;
     
     private Cliente cliente;
     
@@ -44,7 +44,11 @@ public class Conta implements ContaInterface{
         return saldo;
     }
 
-    public void setSaldo(double saldo) {
+    public void setSaldo(double saldo) throws Exception {
+        if(saldo < 0){
+            throw new Exception("Saldo não pode ser negativo");
+        }
+        
          this.saldo = saldo;
     }
 
@@ -64,7 +68,11 @@ public class Conta implements ContaInterface{
     }
 
     @Override
-    public void imprimir() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String imprimir() {        
+        return  "Nº: " + this.numero + "\n"
+                + "NOME: " + this.cliente.getNome() + "\n" 
+                + "CPF: " + this.cliente.getCpf() + "\n"
+                + "DATA ABERTURA: " + this.dataAbertura + "\n"
+                + "SALDO: " + this.saldo + "\n";
     }
 }

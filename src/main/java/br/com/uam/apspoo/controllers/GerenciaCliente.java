@@ -28,7 +28,11 @@ public class GerenciaCliente {
         return null;
     }
     
-    public boolean existeCpf(Cliente cliente){
-        return false;
+    public Cliente getCliente(String cpf){
+        return listaCliente.stream().filter(s -> s.getCpf().equals(cpf)).findFirst().get();
+    }
+    
+    public boolean existeCpf(Cliente cliente){        
+        return listaCliente.stream().anyMatch((s) -> (s.getCpf().equals(cliente.getCpf())));
     }
 }

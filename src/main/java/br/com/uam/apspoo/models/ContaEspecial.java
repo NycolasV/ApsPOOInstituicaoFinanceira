@@ -7,6 +7,9 @@ public class ContaEspecial extends Conta implements ContaInterface{
     
     private double limite;
 
+    public ContaEspecial() {
+    } 
+    
     public ContaEspecial(Cliente cliente, double saldo) {
         super(cliente, saldo);
         this.limite = 1000;
@@ -36,7 +39,12 @@ public class ContaEspecial extends Conta implements ContaInterface{
     }
 
     @Override
-    public void imprimir() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String imprimir() {
+        return  "Nº: " + this.getNumero() + "\n"
+                + "NOME: " + this.getCliente().getNome() + "\n" 
+                + "CPF: " + this.getCliente().getCpf() + "\n"
+                + "DATA ABERTURA: " + this.getDataAbertura() + "\n"
+                + "SALDO: " + this.getSaldo() + "\n"
+                + "LIMITE: " + this.limite + "\n";
     }
 }

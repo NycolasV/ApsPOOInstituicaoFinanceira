@@ -10,5 +10,5 @@ public interface ContaInterface {
     
     public boolean tranferir(Conta destino, double quantia);
     
-    public void imprimir();
+    public String imprimir();
 }

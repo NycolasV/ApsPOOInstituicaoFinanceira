@@ -34,7 +34,7 @@ public class Cliente {
     }
 
     public void setCpf(String cpf) throws Exception {
-        if(cpf.isBlank() || cpf.length() != 11)
+        if(cpf.isBlank())
             throw new Exception("CPF incorreto, tente novamente");
         
         this.cpf = cpf;

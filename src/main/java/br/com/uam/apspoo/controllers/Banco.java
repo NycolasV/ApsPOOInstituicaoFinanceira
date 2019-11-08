@@ -18,7 +18,10 @@ public class Banco {
     }
     
     public void adicionar(Conta conta){
+        if(conta == null)
+            return;
         
+        listaConta.add(conta);
     }
     
     public String listar(){
