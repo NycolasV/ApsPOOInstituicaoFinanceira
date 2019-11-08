@@ -1,50 +1,14 @@
 package br.com.uam.apspoo.models;
 
-import java.time.LocalDate;
-
 /**
  * @author NycolasVieira
  */
-public class Conta {
-    private static int numero = 1;
+public interface ContaInterface { 
+    public void depositar(double quantia);
     
-    private Cliente cliente;
+    public boolean debitar(double quantia);
     
-    private LocalDate dataAbertura;
+    public boolean tranferir(Conta destino, double quantia);
     
-    protected double saldo;
-
-    public Conta() {
-    }
-
-    public Conta(Cliente cliente, double saldo) {
-        this.numero++;
-        this.cliente = cliente;
-        this.dataAbertura = LocalDate.now();
-        this.saldo = saldo;
-    }
-
-    public int getNumero() {
-        return numero;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public LocalDate getDataAbertura() {
-        return dataAbertura;
-    }
-    
-    public double getSaldo() {
-        return saldo;
-    }
-
-    public void setSaldo(double saldo) {
-         this.saldo = saldo;
-    }
+    public void imprimir();
 }

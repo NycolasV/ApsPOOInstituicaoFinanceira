@@ -1,23 +1,51 @@
 package br.com.uam.apspoo.models;
 
+import java.time.LocalDate;
+
 /**
  * @author NycolasVieira
  */
-public class ContaEspecial extends Conta implements ContaInterface{
+public class Conta implements ContaInterface{
+    private static int numero = 1;
     
-    private double limite;
+    private Cliente cliente;
+    
+    private LocalDate dataAbertura;
+    
+    protected double saldo;
 
-    public ContaEspecial(Cliente cliente, double saldo) {
-        super(cliente, saldo);
-        this.limite = 1000;
-    } 
-
-    public double getLimite() {
-        return limite;
+    public Conta() {
     }
 
-    public void setLimite(double limite) {
-        this.limite = limite;
+    public Conta(Cliente cliente, double saldo) {
+        this.numero++;
+        this.cliente = cliente;
+        this.dataAbertura = LocalDate.now();
+        this.saldo = saldo;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public LocalDate getDataAbertura() {
+        return dataAbertura;
+    }
+    
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(double saldo) {
+         this.saldo = saldo;
     }
 
     @Override
