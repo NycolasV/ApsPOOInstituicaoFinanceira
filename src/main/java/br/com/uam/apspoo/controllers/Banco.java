@@ -25,7 +25,19 @@ public class Banco {
     }
     
     public String listar(){
-        return null;
+        String text = "Número de contas: " + listaConta.size() + "\n\n";
+        
+        text = listaConta.stream()
+                .filter((f) -> !(f instanceof ContaEspecial))
+                .map((f) -> f.imprimir() + "--------------------------\n")
+                .reduce(text, String::concat);
+        
+        text = listaConta.stream()
+                .filter((f) -> f instanceof ContaEspecial)
+                .map((f) -> f.imprimir() + "--------------------------\n")
+                .reduce(text, String::concat);
+        
+        return text;
     }
     
     public String pesquisar(int numero){

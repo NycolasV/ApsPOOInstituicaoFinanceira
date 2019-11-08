@@ -25,7 +25,13 @@ public class GerenciaCliente {
     }
     
     public String listar(){
-        return null;
+        String text = "Número de clientes: " + listaCliente.size() + "\n\n";
+        
+        text = listaCliente.stream()
+                .map((f) -> f.imprimir() + "--------------------------\n")
+                .reduce(text, String::concat);
+        
+        return text;
     }
     
     public Cliente getCliente(String cpf){

@@ -6,7 +6,9 @@ import java.time.LocalDate;
  * @author NycolasVieira
  */
 public class Conta implements ContaInterface{
-    private static int numero = 0;
+    private static int numeroConta = 1;
+    
+    private int numero;
     
     private Cliente cliente;
     
@@ -18,7 +20,7 @@ public class Conta implements ContaInterface{
     }
 
     public Conta(Cliente cliente, double saldo) {
-        this.numero++;
+        this.numero = numeroConta++;
         this.cliente = cliente;
         this.dataAbertura = LocalDate.now();
         this.saldo = saldo;

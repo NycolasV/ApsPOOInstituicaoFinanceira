@@ -52,6 +52,8 @@ public class Cliente {
     }
     
     public String imprimir(){
-        return "NOME: " + this.nome + "\n" + "CPF: " + this.cpf + "\n" + "TELEFONE: " + this.telefone;        
+        return "NOME: " + this.nome + "\n" 
+                + "CPF: " + this.cpf + "\n" 
+                + "TELEFONE: " + this.telefone + "\n";        
     }
 }

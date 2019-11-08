@@ -28,6 +28,10 @@ public class InterfaceUsuario {
                     factory.cadastrarConta();
                     break;
                 
+                case "3":
+                    factory.listarClasse("conta");
+                    break;
+                    
                 case "9":
                     encerrarPrograma = JOptionPane.showConfirmDialog(null, "Deseja encerrar o programa?");
                     break;

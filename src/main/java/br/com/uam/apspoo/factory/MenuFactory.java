@@ -2,6 +2,7 @@ package br.com.uam.apspoo.factory;
 
 import br.com.uam.apspoo.controllers.*;
 import br.com.uam.apspoo.models.*;
+import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
 
 /**
@@ -58,12 +59,27 @@ public class MenuFactory {
                 default:
                     return;
             }
-        } catch (Exception ex) {
+        } catch (HeadlessException | NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         banco.adicionar(conta);
         JOptionPane.showMessageDialog(null, conta.imprimir(), "Cadastro realizado com sucesso!", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    public void listarClasse(String tipoLista){
+        switch(tipoLista){
+            case "conta":
+                JOptionPane.showMessageDialog(null, banco.listar(), "Lista de Contas", JOptionPane.INFORMATION_MESSAGE);
+                break;
+                
+            case "cliente":
+                JOptionPane.showMessageDialog(null, gerenciaCliente.listar(), "Lista de Clientes", JOptionPane.INFORMATION_MESSAGE);
+                break;
+            
+            default:
+                break;
+        }
     }
 }
