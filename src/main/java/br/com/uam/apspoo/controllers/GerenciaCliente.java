@@ -18,7 +18,10 @@ public class GerenciaCliente {
     }
     
     public void adicionar(Cliente cliente){
+        if(cliente == null)
+            return;
         
+        listaCliente.add(cliente);
     }
     
     public String listar(){

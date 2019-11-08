@@ -1,6 +1,6 @@
 package br.com.uam.apspoo.views;
 
-import br.com.uam.apspoo.controllers.*;
+import br.com.uam.apspoo.factory.*;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,20 +13,23 @@ public class InterfaceUsuario {
     }
     
     public static void menu(){
-        Banco banco = new Banco();
-        GerenciaCliente gerenciaCliente = new GerenciaCliente();
+        MenuFactory factory = new MenuFactory();
         int encerrarPrograma = 1;
         
         do {
             var menuEscolha = JOptionPane.showInputDialog(opcoesMenu());
             
             switch(menuEscolha){
+                case "1":
+                    factory.cadastrarCliente();
+                    break;
+                
                 case "9":
                     encerrarPrograma = JOptionPane.showConfirmDialog(null, "Deseja encerrar o programa?");
                     break;
                     
                 default:
-                    JOptionPane.showMessageDialog(null, "Valor inserido está incorreto, tente novamente");
+                    JOptionPane.showMessageDialog(null, "Valor inserido está incorreto, tente novamente", "ERRO", JOptionPane.ERROR_MESSAGE);
                     break;
             }
         } while(encerrarPrograma != JOptionPane.YES_OPTION);
