@@ -67,19 +67,49 @@ public class MenuFactory {
         banco.adicionar(conta);
         JOptionPane.showMessageDialog(null, conta.imprimir(), "Cadastro realizado com sucesso!", JOptionPane.INFORMATION_MESSAGE);
     }
-    
-    public void listarClasse(String tipoLista){
-        switch(tipoLista){
+
+    public void listarClasse(String tipoLista) {
+        switch (tipoLista) {
             case "conta":
                 JOptionPane.showMessageDialog(null, banco.listar(), "Lista de Contas", JOptionPane.INFORMATION_MESSAGE);
                 break;
-                
+
             case "cliente":
                 JOptionPane.showMessageDialog(null, gerenciaCliente.listar(), "Lista de Clientes", JOptionPane.INFORMATION_MESSAGE);
                 break;
-            
+
             default:
                 break;
+        }
+    }
+
+    public void informarNumeroConta(String tipoPesquisa) {
+        try {
+            int numero = Integer.parseInt(JOptionPane.showInputDialog(null, "Informe o Nº da Conta:", "Pesquisa Número Conta", JOptionPane.QUESTION_MESSAGE));
+            
+            switch (tipoPesquisa) {
+                case "pesquisarConta":
+                    JOptionPane.showMessageDialog(null, banco.pesquisar(numero), "Conta Pesquisada", JOptionPane.INFORMATION_MESSAGE);
+                    break;
+
+                case "depositar":
+                    Conta contaDeposito = banco.getConta(numero);
+                    contaDeposito.depositar(Double.parseDouble(JOptionPane.showInputDialog(null, "Valor a ser depositado:", "Depósito", JOptionPane.QUESTION_MESSAGE)));
+                    banco.setConta(contaDeposito);
+                    
+                    JOptionPane.showMessageDialog(null, "Novo saldo: " + contaDeposito.getSaldo(), "Depósito", JOptionPane.INFORMATION_MESSAGE);
+                    break;
+
+                case "debitar":
+                    Conta contaDebito = banco.getConta(numero);
+                    contaDebito.debitar(Double.parseDouble(JOptionPane.showInputDialog(null, "Valor a ser debitado:", "Saque", JOptionPane.QUESTION_MESSAGE)));
+                    banco.setConta(contaDebito);
+                    
+                    JOptionPane.showMessageDialog(null, "Novo saldo: " + contaDebito.getSaldo(), "Saque", JOptionPane.INFORMATION_MESSAGE);
+                    break;
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

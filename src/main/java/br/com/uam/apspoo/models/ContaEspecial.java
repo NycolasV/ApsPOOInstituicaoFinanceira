@@ -24,13 +24,25 @@ public class ContaEspecial extends Conta implements ContaInterface{
     }
 
     @Override
-    public void depositar(double quantia) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void depositar(double quantia) throws Exception {
+        if(quantia <= 0)
+            throw new Exception("Quantia inválida!");
+        
+        this.saldo += quantia;
     }
 
     @Override
-    public boolean debitar(double quantia) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean debitar(double quantia) throws Exception {
+        if(quantia <= 0)
+            throw new Exception("Quantia inválida!");
+        
+        var saldoValidacao = this.saldo;
+        var limiteValidacao = this.limite;
+        if((saldoValidacao -= quantia) < (limiteValidacao -= 2*limite))
+            throw new Exception("Saldo insulficiente!");
+        
+        this.saldo -= quantia;
+        return true;
     }
 
     @Override

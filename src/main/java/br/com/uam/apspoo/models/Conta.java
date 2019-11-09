@@ -47,21 +47,31 @@ public class Conta implements ContaInterface{
     }
 
     public void setSaldo(double saldo) throws Exception {
-        if(saldo < 0){
+        if(saldo < 0)
             throw new Exception("Saldo não pode ser negativo");
-        }
         
          this.saldo = saldo;
     }
 
     @Override
-    public void depositar(double quantia) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void depositar(double quantia) throws Exception{
+        if(quantia <= 0)
+            throw new Exception("Quantia inválida!");
+        
+        this.saldo += quantia;
     }
 
     @Override
-    public boolean debitar(double quantia) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean debitar(double quantia) throws Exception {
+        if(quantia <= 0)
+            throw new Exception("Quantia inválida!");
+        
+        var saldoValidacao = this.saldo;
+        if((saldoValidacao -= quantia) < 0)
+            throw new Exception("Saldo insulficiente!");
+        
+        this.saldo -= quantia;
+        return true;
     }
 
     @Override

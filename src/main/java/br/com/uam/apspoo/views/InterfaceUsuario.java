@@ -31,6 +31,18 @@ public class InterfaceUsuario {
                 case "3":
                     factory.listarClasse("conta");
                     break;
+                
+                case "4":
+                    factory.informarNumeroConta("pesquisarConta");
+                    break;
+                    
+                case "5":
+                    factory.informarNumeroConta("depositar");
+                    break;
+                    
+                case "6":
+                    factory.informarNumeroConta("debitar");
+                    break;
                     
                 case "9":
                     encerrarPrograma = JOptionPane.showConfirmDialog(null, "Deseja encerrar o programa?");
