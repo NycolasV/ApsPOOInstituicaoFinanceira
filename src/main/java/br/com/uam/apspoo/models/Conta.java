@@ -76,7 +76,15 @@ public class Conta implements ContaInterface{
 
     @Override
     public boolean tranferir(Conta destino, double quantia) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        var saldoValidacao = this.saldo;
+        if(quantia <= 0 
+                || destino == null 
+                || (saldoValidacao -= quantia) < 0)
+            return false;
+        
+        this.saldo -= quantia;
+        destino.saldo += quantia;
+        return true;
     }
 
     @Override

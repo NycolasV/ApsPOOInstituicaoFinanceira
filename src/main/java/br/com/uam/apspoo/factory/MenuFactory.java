@@ -59,7 +59,7 @@ public class MenuFactory {
                 default:
                     return;
             }
-        } catch (HeadlessException | NumberFormatException ex) {
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -68,7 +68,7 @@ public class MenuFactory {
         JOptionPane.showMessageDialog(null, conta.imprimir(), "Cadastro realizado com sucesso!", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    public void listarClasse(String tipoLista) {
+    public void listar(String tipoLista) {
         switch (tipoLista) {
             case "conta":
                 JOptionPane.showMessageDialog(null, banco.listar(), "Lista de Contas", JOptionPane.INFORMATION_MESSAGE);
@@ -86,7 +86,7 @@ public class MenuFactory {
     public void informarNumeroConta(String tipoPesquisa) {
         try {
             int numero = Integer.parseInt(JOptionPane.showInputDialog(null, "Informe o Nº da Conta:", "Pesquisa Número Conta", JOptionPane.QUESTION_MESSAGE));
-            
+
             switch (tipoPesquisa) {
                 case "pesquisarConta":
                     JOptionPane.showMessageDialog(null, banco.pesquisar(numero), "Conta Pesquisada", JOptionPane.INFORMATION_MESSAGE);
@@ -96,7 +96,7 @@ public class MenuFactory {
                     Conta contaDeposito = banco.getConta(numero);
                     contaDeposito.depositar(Double.parseDouble(JOptionPane.showInputDialog(null, "Valor a ser depositado:", "Depósito", JOptionPane.QUESTION_MESSAGE)));
                     banco.setConta(contaDeposito);
-                    
+
                     JOptionPane.showMessageDialog(null, "Novo saldo: " + contaDeposito.getSaldo(), "Depósito", JOptionPane.INFORMATION_MESSAGE);
                     break;
 
@@ -104,9 +104,40 @@ public class MenuFactory {
                     Conta contaDebito = banco.getConta(numero);
                     contaDebito.debitar(Double.parseDouble(JOptionPane.showInputDialog(null, "Valor a ser debitado:", "Saque", JOptionPane.QUESTION_MESSAGE)));
                     banco.setConta(contaDebito);
-                    
+
                     JOptionPane.showMessageDialog(null, "Novo saldo: " + contaDebito.getSaldo(), "Saque", JOptionPane.INFORMATION_MESSAGE);
                     break;
+
+                case "remover":
+                    int confirmarRemocao = JOptionPane.showConfirmDialog(null, "Deseja remover a conta Nº " + numero);
+                    if (confirmarRemocao == JOptionPane.YES_OPTION) {
+                        if (banco.remover(numero)) {
+                            JOptionPane.showMessageDialog(null, "Conta removida com sucesso!", "Remover conta", JOptionPane.INFORMATION_MESSAGE);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Conta inválida ou não pode ser removida", "Remover conta", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                    }
+                    break;
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void transferirValor() {
+        try {
+            int numeroOrigem = Integer.parseInt(JOptionPane.showInputDialog(null, "Informe o Nº da Conta de Origem:", "Transferencia", JOptionPane.QUESTION_MESSAGE));
+            Conta contaOrigem = banco.getConta(numeroOrigem);
+            
+            int numeroDestino = Integer.parseInt(JOptionPane.showInputDialog(null, "Informe o Nº da Conta de Destino:", "Transferencia", JOptionPane.QUESTION_MESSAGE));
+            Conta contaDestino = banco.getConta(numeroDestino);
+            
+            double quantia = Double.parseDouble(JOptionPane.showInputDialog(null, "Informe o valor a ser transferido:", "Transferencia", JOptionPane.QUESTION_MESSAGE));
+            
+            if(contaOrigem.tranferir(contaDestino, quantia)){
+                JOptionPane.showMessageDialog(null, "Transferencia realizada com sucesso!", "Transferencia", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Não foi possível realizar a transferencia", "Transferencia", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);

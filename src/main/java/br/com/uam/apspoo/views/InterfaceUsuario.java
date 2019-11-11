@@ -11,51 +11,59 @@ public class InterfaceUsuario {
     public static void main(String[] args) {
         menu();
     }
-    
-    public static void menu(){
+
+    public static void menu() {
         MenuFactory factory = new MenuFactory();
         int encerrarPrograma = 1;
-        
+
         do {
             var menuEscolha = JOptionPane.showInputDialog(opcoesMenu());
-            
-            switch(menuEscolha){
+
+            switch (menuEscolha) {
                 case "1":
                     factory.cadastrarCliente();
                     break;
-                    
+
                 case "2":
                     factory.cadastrarConta();
                     break;
-                
+
                 case "3":
-                    factory.listarClasse("conta");
+                    factory.listar("conta");
                     break;
-                
+
                 case "4":
                     factory.informarNumeroConta("pesquisarConta");
                     break;
-                    
+
                 case "5":
                     factory.informarNumeroConta("depositar");
                     break;
-                    
+
                 case "6":
                     factory.informarNumeroConta("debitar");
                     break;
-                    
+
+                case "7":
+                    factory.transferirValor();
+                    break;
+
+                case "8":
+                    factory.informarNumeroConta("remover");
+                    break;
+
                 case "9":
                     encerrarPrograma = JOptionPane.showConfirmDialog(null, "Deseja encerrar o programa?");
                     break;
-                    
+
                 default:
                     JOptionPane.showMessageDialog(null, "Valor inserido está incorreto, tente novamente", "ERRO", JOptionPane.ERROR_MESSAGE);
                     break;
             }
-        } while(encerrarPrograma != JOptionPane.YES_OPTION);
+        } while (encerrarPrograma != JOptionPane.YES_OPTION);
     }
-    
-    public static String opcoesMenu(){
+
+    public static String opcoesMenu() {
         return "=== MENU DO BANCO ===\n"
                 + "1 - Cadastrar Cliente\n"
                 + "2 - Cadastrar Conta\n"

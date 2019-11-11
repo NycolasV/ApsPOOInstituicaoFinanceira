@@ -59,6 +59,15 @@ public class Banco {
     }
     
     public boolean remover(int numero){
-        return false;
+        try{
+            var conta = getConta(numero);
+            
+            if(conta.getSaldo() != 0)
+                return false;
+                
+            return listaConta.remove(conta);
+        } catch(Exception ex){
+            return false;
+        }
     }
 }
