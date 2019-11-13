@@ -2,7 +2,6 @@ package br.com.uam.apspoo.factory;
 
 import br.com.uam.apspoo.controllers.*;
 import br.com.uam.apspoo.models.*;
-import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
 
 /**

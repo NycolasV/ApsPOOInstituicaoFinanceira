@@ -1,5 +1,7 @@
 package br.com.uam.apspoo.models;
 
+import java.text.DecimalFormat;
+
 /**
  * @author NycolasVieira
  */
@@ -30,6 +32,9 @@ public class ContaEspecial extends Conta implements ContaInterface {
         }
 
         this.saldo += quantia;
+        
+        DecimalFormat df = new DecimalFormat("#.##");
+        this.saldo = Double.parseDouble(df.format(this.saldo));
     }
 
     @Override
@@ -43,8 +48,11 @@ public class ContaEspecial extends Conta implements ContaInterface {
         if ((saldoValidacao -= quantia) < (limiteValidacao -= 2 * limite)) {
             throw new Exception("Saldo insulficiente!");
         }
-
+        
         this.saldo -= quantia;
+        
+        DecimalFormat df = new DecimalFormat("#.##");
+        this.saldo = Double.parseDouble(df.format(this.saldo));
         return true;
     }
 
@@ -59,6 +67,10 @@ public class ContaEspecial extends Conta implements ContaInterface {
 
         this.saldo -= quantia;
         destino.saldo += quantia;
+        
+        DecimalFormat df = new DecimalFormat("#.##");
+        this.saldo = Double.parseDouble(df.format(this.saldo));
+        destino.saldo = Double.parseDouble(df.format(destino.saldo));
         return true;
     }
 

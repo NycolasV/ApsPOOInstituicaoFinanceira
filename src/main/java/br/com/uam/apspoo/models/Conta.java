@@ -1,19 +1,21 @@
 package br.com.uam.apspoo.models;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 
 /**
  * @author NycolasVieira
  */
-public class Conta implements ContaInterface{
+public class Conta implements ContaInterface {
+
     private static int numeroConta = 1;
-    
+
     private int numero;
-    
+
     private Cliente cliente;
-    
+
     private LocalDate dataAbertura;
-    
+
     protected double saldo;
 
     public Conta() {
@@ -41,56 +43,70 @@ public class Conta implements ContaInterface{
     public LocalDate getDataAbertura() {
         return dataAbertura;
     }
-    
+
     public double getSaldo() {
         return saldo;
     }
 
     public void setSaldo(double saldo) throws Exception {
-        if(saldo < 0)
+        if (saldo < 0) {
             throw new Exception("Saldo não pode ser negativo");
-        
-         this.saldo = saldo;
+        }
+
+        this.saldo = saldo;
     }
 
     @Override
-    public void depositar(double quantia) throws Exception{
-        if(quantia <= 0)
+    public void depositar(double quantia) throws Exception {
+        if (quantia <= 0) {
             throw new Exception("Quantia inválida!");
-        
+        }
+
         this.saldo += quantia;
+        
+        DecimalFormat df = new DecimalFormat("#.##");
+        this.saldo = Double.parseDouble(df.format(this.saldo));
     }
 
     @Override
     public boolean debitar(double quantia) throws Exception {
-        if(quantia <= 0)
+        if (quantia <= 0) {
             throw new Exception("Quantia inválida!");
-        
+        }
+
         var saldoValidacao = this.saldo;
-        if((saldoValidacao -= quantia) < 0)
+        if ((saldoValidacao -= quantia) < 0) {
             throw new Exception("Saldo insulficiente!");
-        
+        }
+
         this.saldo -= quantia;
+        
+        DecimalFormat df = new DecimalFormat("#.##");
+        this.saldo = Double.parseDouble(df.format(this.saldo));
         return true;
     }
 
     @Override
     public boolean tranferir(Conta destino, double quantia) {
         var saldoValidacao = this.saldo;
-        if(quantia <= 0 
-                || destino == null 
+        if (quantia <= 0
+                || destino == null
                 || (saldoValidacao -= quantia) < 0)
             return false;
         
         this.saldo -= quantia;
         destino.saldo += quantia;
+        
+        DecimalFormat df = new DecimalFormat("#.##");
+        this.saldo = Double.parseDouble(df.format(this.saldo));
+        destino.saldo = Double.parseDouble(df.format(destino.saldo));
         return true;
     }
 
     @Override
-    public String imprimir() {        
-        return  "Nº: " + this.numero + "\n"
-                + "NOME: " + this.cliente.getNome() + "\n" 
+    public String imprimir() {
+        return "Nº: " + this.numero + "\n"
+                + "NOME: " + this.cliente.getNome() + "\n"
                 + "CPF: " + this.cliente.getCpf() + "\n"
                 + "DATA ABERTURA: " + this.dataAbertura + "\n"
                 + "SALDO: " + this.saldo + "\n";
