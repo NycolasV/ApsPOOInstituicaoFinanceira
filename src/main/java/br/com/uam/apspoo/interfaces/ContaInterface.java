@@ -1,4 +1,6 @@
-package br.com.uam.apspoo.models;
+package br.com.uam.apspoo.interfaces;
+
+import br.com.uam.apspoo.models.Conta;
 
 /**
  * @author NycolasVieira

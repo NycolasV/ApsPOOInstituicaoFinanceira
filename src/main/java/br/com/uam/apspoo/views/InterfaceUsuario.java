@@ -17,42 +17,42 @@ public class InterfaceUsuario {
         int encerrarPrograma = 1;
 
         do {
-            var menuEscolha = JOptionPane.showInputDialog(opcoesMenu());
+            String menuEscolha = (String) JOptionPane.showInputDialog(null, "Escolha uma opção:", "MENU DO BANCO", JOptionPane.QUESTION_MESSAGE, null, opcoesMenu(), opcoesMenu()[0]);
 
             switch (menuEscolha) {
-                case "1":
+                case "Cadastrar Cliente":
                     factory.cadastrarCliente();
                     break;
 
-                case "2":
+                case "Cadastrar Conta":
                     factory.cadastrarConta();
                     break;
 
-                case "3":
+                case "Listar Conta":
                     factory.listar("conta");
                     break;
 
-                case "4":
+                case "Pesquisar Conta":
                     factory.informarNumeroConta("pesquisarConta");
                     break;
 
-                case "5":
+                case "Depositar":
                     factory.informarNumeroConta("depositar");
                     break;
 
-                case "6":
+                case "Debitar(sacar)":
                     factory.informarNumeroConta("debitar");
                     break;
 
-                case "7":
+                case "Transferir":
                     factory.transferirValor();
                     break;
 
-                case "8":
+                case "Remover Conta":
                     factory.informarNumeroConta("remover");
                     break;
 
-                case "9":
+                case "Sair":
                     encerrarPrograma = JOptionPane.showConfirmDialog(null, "Deseja encerrar o programa?");
                     break;
 
@@ -63,16 +63,15 @@ public class InterfaceUsuario {
         } while (encerrarPrograma != JOptionPane.YES_OPTION);
     }
 
-    public static String opcoesMenu() {
-        return "=== MENU DO BANCO ===\n"
-                + "1 - Cadastrar Cliente\n"
-                + "2 - Cadastrar Conta\n"
-                + "3 - Listar Conta\n"
-                + "4 - Pesquisar Conta\n"
-                + "5 - Depositar\n"
-                + "6 - Debitar(sacar)\n"
-                + "7 - Transferir\n"
-                + "8 - Remover Conta\n"
-                + "9 - Sair\n";
+    public static String[] opcoesMenu() {
+        return new String[]{"Cadastrar Cliente",
+             "Cadastrar Conta",
+             "Listar Conta",
+             "Pesquisar Conta",
+             "Depositar",
+             "Debitar(sacar)",
+             "Transferir",
+             "Remover Conta",
+             "Sair"};
     }
 }

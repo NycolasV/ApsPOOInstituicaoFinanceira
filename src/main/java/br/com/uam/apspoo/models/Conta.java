@@ -1,5 +1,6 @@
 package br.com.uam.apspoo.models;
 
+import br.com.uam.apspoo.interfaces.*;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 
